@@ -51,18 +51,27 @@ main {
 
 .NPImg {
   margin: 0 auto;
-  width: fit-content;
-  height: fit-content;
+  margin-top: 5px;
+  width: 60%;
+  height: 40%;
   box-shadow: 1px 1px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .img {
-  width: 154px;
-  height: 132px;
+  width: 100%;
+  height: 100%;
 }
 
 .playButton,
 .pauseButton {
+  cursor: pointer;
+  height: 40px;
+  width: 35px;
+}
+
+.prevButton,
+.nextButton {
+  height: 25px;
   cursor: pointer;
 }
 
@@ -88,6 +97,7 @@ main {
   height: 3px;
   background-color: white;
   margin: 0 auto;
+  cursor: pointer;
 }
 
 .progress {
@@ -152,7 +162,7 @@ footer {
   color: #a6899e;
 }
 
-.currenTime {
+.currentTime {
   font-family: var(--font-family);
   font-weight: 300;
   font-size: 10px;
