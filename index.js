@@ -110,27 +110,20 @@ bar.addEventListener('click', e => {
 });
 
 function playNext() {
+  song = songs[playNum];
+  audio.src = song.src;
   if (!isPlay) {
-    song = songs[playNum];
-    audio.src = song.src;
     audio.pause();
     pauseBtn.classList.remove('visible');
     pauseBtn.classList.add('hidden');
     playBtn.classList.remove('hidden');
-
-    cover.remove();
-    songText.remove();
-    songImage(playNum);
-    songTitle(playNum);
   } else {
-    song = songs[playNum];
-    audio.src = song.src;
     audio.play();
-    cover.remove();
-    songText.remove();
-    songImage(playNum);
-    songTitle(playNum);
   }
+  cover.remove();
+  songText.remove();
+  songImage(playNum);
+  songTitle(playNum);
 }
 
 next.addEventListener('click', e => {
