@@ -110,62 +110,37 @@ bar.addEventListener('click', e => {
 });
 
 function playNext() {
+  if (!isPlay) {
+    song = songs[playNum];
+    audio.src = song.src;
+    audio.pause();
+    pauseBtn.classList.remove('visible');
+    pauseBtn.classList.add('hidden');
+    playBtn.classList.remove('hidden');
+
+    cover.remove();
+    songText.remove();
+    songImage(playNum);
+    songTitle(playNum);
+  } else {
+    song = songs[playNum];
+    audio.src = song.src;
+    audio.play();
+    cover.remove();
+    songText.remove();
+    songImage(playNum);
+    songTitle(playNum);
+  }
+}
+
+next.addEventListener('click', e => {
   nextS();
-  if (!isPlay) {
-    duration.innerHTML = duration.innerHTML.replace('0:00', getNormalTime(dur));
-    song = songs[playNum];
-    audio.src = song.src;
-    audio.pause();
-    pauseBtn.classList.remove('visible');
-    pauseBtn.classList.add('hidden');
-    playBtn.classList.remove('hidden');
-
-    cover.remove();
-    songText.remove();
-    songImage(playNum);
-    songTitle(playNum);
-  } else {
-    song = songs[playNum];
-    audio.src = song.src;
-
-    dur = audio.duration;
-    duration.innerHTML = duration.innerHTML.replace('0:00', getNormalTime(dur));
-
-    audio.play();
-    cover.remove();
-    songText.remove();
-    songImage(playNum);
-    songTitle(playNum);
-  }
-}
-
-function playPrev() {
+  playNext();
+});
+prev.addEventListener('click', e => {
   prevS();
-  if (!isPlay) {
-    song = songs[playNum];
-    audio.src = song.src;
-    audio.pause();
-    pauseBtn.classList.remove('visible');
-    pauseBtn.classList.add('hidden');
-    playBtn.classList.remove('hidden');
-
-    cover.remove();
-    songText.remove();
-    songImage(playNum);
-    songTitle(playNum);
-  } else {
-    song = songs[playNum];
-    audio.src = song.src;
-    audio.play();
-    cover.remove();
-    songText.remove();
-    songImage(playNum);
-    songTitle(playNum);
-  }
-}
-
-next.addEventListener('click', playNext);
-prev.addEventListener('click', playPrev);
+  playNext();
+});
 
 function nextS() {
   playNum = playNum + 1;
@@ -185,5 +160,5 @@ function prevS() {
 audio.addEventListener('ended', playNext);
 
 function changeSong() {
-  
+
 }
