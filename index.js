@@ -40,6 +40,7 @@ let isPlay = false;
 
 let song = songs[playNum];
 const audio = new Audio();
+audio.src = song.src;
 console.dir(audio);
 
 function songImage(playNum) {
@@ -56,7 +57,6 @@ function songTitle(playNum) {
 }
 
 function playAudio() {
-  audio.src = song.src;
   if (!isPlay) {
     pauseBtn.classList.remove('hidden');
     pauseBtn.classList.add('visible');
@@ -170,3 +170,5 @@ function prevS() {
     playNum = songs.length - 1;
   }
 }
+
+audio.addEventListener('ended', playNext);
