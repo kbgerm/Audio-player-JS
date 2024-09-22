@@ -83,6 +83,11 @@ function progress() {
   current.innerHTML = getNormalTime(cur);
 };
 
+audio.addEventListener('durationchange', e => {
+  dur = audio.duration;
+  duration.innerHTML = getNormalTime(dur);
+})
+
 playBtn.addEventListener('click', playAudio);
 pauseBtn.addEventListener('click', playAudio);
 
@@ -93,7 +98,7 @@ function start() {
   songImage(playNum);
   songTitle(playNum);
   dur = audio.duration;
-  duration.innerHTML = duration.innerHTML.replace('0:00', getNormalTime(dur));
+  duration.innerHTML = getNormalTime(dur);
 }
 
 function getNormalTime(s) {
@@ -124,6 +129,8 @@ function playNext() {
   songText.remove();
   songImage(playNum);
   songTitle(playNum);
+
+  dur = audio.duration;
 }
 
 next.addEventListener('click', e => {
