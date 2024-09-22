@@ -43,6 +43,8 @@ const audio = new Audio();
 audio.src = song.src;
 console.dir(audio);
 
+let dur;
+
 function songImage(playNum) {
   song = songs[playNum];
   cover.className = 'img';
@@ -76,10 +78,8 @@ audio.addEventListener('timeupdate', progress);
 
 function progress() {
   const progressBar = document.querySelector(".progress");
-  progressBar.style.width = audio.currentTime / audio.duration * 100 + "%";
-  let dur = audio.duration;
   let cur = audio.currentTime;
-  duration.innerHTML = duration.innerHTML.replace('0:00', getNormalTime(dur));
+  progressBar.style.width = audio.currentTime / audio.duration * 100 + "%";
   current.innerHTML = getNormalTime(cur);
 };
 
@@ -92,6 +92,8 @@ function start() {
   pauseBtn.classList.add('hidden');
   songImage(playNum);
   songTitle(playNum);
+  dur = audio.duration;
+  duration.innerHTML = duration.innerHTML.replace('0:00', getNormalTime(dur));
 }
 
 function getNormalTime(s) {
@@ -110,6 +112,9 @@ bar.addEventListener('click', e => {
 function playNext() {
   nextS();
   if (!isPlay) {
+    duration.innerHTML = duration.innerHTML.replace('0:00', getNormalTime(dur));
+    song = songs[playNum];
+    audio.src = song.src;
     audio.pause();
     pauseBtn.classList.remove('visible');
     pauseBtn.classList.add('hidden');
@@ -122,6 +127,10 @@ function playNext() {
   } else {
     song = songs[playNum];
     audio.src = song.src;
+
+    dur = audio.duration;
+    duration.innerHTML = duration.innerHTML.replace('0:00', getNormalTime(dur));
+
     audio.play();
     cover.remove();
     songText.remove();
@@ -133,6 +142,8 @@ function playNext() {
 function playPrev() {
   prevS();
   if (!isPlay) {
+    song = songs[playNum];
+    audio.src = song.src;
     audio.pause();
     pauseBtn.classList.remove('visible');
     pauseBtn.classList.add('hidden');
@@ -172,3 +183,7 @@ function prevS() {
 }
 
 audio.addEventListener('ended', playNext);
+
+function changeSong() {
+  
+}
