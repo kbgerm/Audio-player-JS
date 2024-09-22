@@ -67,6 +67,7 @@ main {
   cursor: pointer;
   height: 40px;
   width: 35px;
+  margin-left: 5px;
 }
 
 .prevButton,

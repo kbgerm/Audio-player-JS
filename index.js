@@ -108,21 +108,21 @@ bar.addEventListener('click', e => {
 });
 
 function playNext() {
-  nextSong();
-  if (playNum > songs.length - 1) {
-    playNum = 0;
-  }
-  cover.remove();
-  songText.remove();
-  songImage(playNum);
-  songTitle(playNum);
-}
+  nextS();
+  if (!isPlay) {
+    audio.pause();
+    pauseBtn.classList.remove('visible');
+    pauseBtn.classList.add('hidden');
+    playBtn.classList.remove('hidden');
 
-function playPrev() {
-  prevSong();
-  if (playNum < 0) {
-    playNum = songs.length;
+    cover.remove();
+    songText.remove();
+    songImage(playNum);
+    songTitle(playNum);
   } else {
+    song = songs[playNum];
+    audio.src = song.src;
+    audio.play();
     cover.remove();
     songText.remove();
     songImage(playNum);
@@ -130,16 +130,43 @@ function playPrev() {
   }
 }
 
-function prevSong() {
-  playNum = playNum - 1;
-  return prevSong;
-}
+function playPrev() {
+  prevS();
+  if (!isPlay) {
+    audio.pause();
+    pauseBtn.classList.remove('visible');
+    pauseBtn.classList.add('hidden');
+    playBtn.classList.remove('hidden');
 
-function nextSong() {
-  playNum = playNum + 1;
-  return playNum;
+    cover.remove();
+    songText.remove();
+    songImage(playNum);
+    songTitle(playNum);
+  } else {
+    song = songs[playNum];
+    audio.src = song.src;
+    audio.play();
+    cover.remove();
+    songText.remove();
+    songImage(playNum);
+    songTitle(playNum);
+  }
 }
 
 next.addEventListener('click', playNext);
 prev.addEventListener('click', playPrev);
 
+function nextS() {
+  playNum = playNum + 1;
+  if (playNum >= songs.length) {
+    playNum = 0;
+  }
+}
+
+function prevS() {
+  audio.pause();
+  playNum = playNum - 1;
+  if (playNum < 0) {
+    playNum = songs.length - 1;
+  }
+}
