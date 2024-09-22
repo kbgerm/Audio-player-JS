@@ -157,8 +157,7 @@ function prevS() {
   }
 }
 
-audio.addEventListener('ended', playNext);
-
-function changeSong() {
-
-}
+audio.addEventListener('ended', e => {
+  nextS();
+  playNext();
+});
